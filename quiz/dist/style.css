@@ -1,0 +1,618 @@
+body {
+  font-family: arial;
+}
+
+/* Base Grow */
+@keyframes BaseGrow {
+  0% {
+    transform: scale(0.1);
+    animation-timing-function: ease-out;
+  }
+  80% {
+    transform: scale(1.1);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
+}
+/* Pole Grow */
+@keyframes PoleGrow {
+  0% {
+    transform: scaleY(0.1);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  80% {
+    transform: scaleY(1.1);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+}
+/* Point Flip */
+@keyframes PointFlip {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+    opacity: 1;
+  }
+}
+*, *:before, *:after {
+  transition: none;
+}
+
+.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  position: absolute !important;
+}
+
+.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  right: auto !important;
+  left: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  z-index: 0 !important;
+}
+
+.animated {
+  opacity: 1 !important;
+  transition: opacity 500ms ease-in-out !important;
+}
+
+.wai {
+  position: absolute !important;
+  display: block !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  font-size: 1px !important;
+}
+
+.sign-post {
+  position: relative;
+  height: 54vw;
+  width: 28%;
+  margin: 30px auto 60px;
+}
+@media screen and (min-width: 500px) {
+  .sign-post {
+    margin: 40px auto 100px;
+    height: 400px;
+    width: 225px;
+  }
+}
+.sign-post__base {
+  display: block;
+  width: 100%;
+  transform-origin: center;
+  animation-name: BaseGrow;
+  animation-duration: 1s;
+  margin-top: -20%;
+}
+@media screen and (min-width: 500px) {
+  .sign-post__base {
+    margin-top: -50px;
+  }
+}
+.sign-post__pole {
+  display: block;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0);
+  transform-origin: bottom;
+  animation-name: PoleGrow;
+  animation-duration: 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: forwards;
+}
+.sign-post__right {
+  opacity: 0;
+  display: block;
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  width: 100%;
+  animation-name: PointFlip;
+  animation-duration: 1s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+.sign-post__left {
+  opacity: 0;
+  display: block;
+  position: absolute;
+  top: 34%;
+  left: -8%;
+  width: 100%;
+  animation-name: PointFlip;
+  animation-duration: 1s;
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+}
+
+.quiz-button {
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #ededed;
+  display: inline-block;
+  padding: 13px 10px;
+  color: #444444;
+  line-height: 1;
+  border-radius: 0;
+  cursor: pointer;
+  border: 2px solid #0076ce;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 250ms ease-in-out;
+  width: 100%;
+  max-width: 300px;
+}
+@media screen and (min-width: 500px) {
+  .quiz-button {
+    padding: 23px 20px;
+    font-size: 12px;
+    width: auto;
+  }
+}
+.quiz-button:focus {
+  background-color: #bababa;
+  text-decoration: none;
+}
+.quiz-button:hover:not([disabled]) {
+  background-color: #0076ce;
+  color: #fff;
+  border: 2px solid #cccccc;
+  text-decoration: none;
+}
+.no-js .quiz-button {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.quiz-button.small {
+  font-size: 16px;
+  padding: 15px;
+  max-width: 100px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.career-quiz-section {
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0px 0px 100px 230px rgba(0, 0, 0, 0);
+  transition: box-shadow 500ms ease, height 500ms ease;
+  overflow: hidden;
+}
+.career-quiz-section:hover:not(.quiz-ended) {
+  box-shadow: 0px 0px 100px 230px rgba(0, 0, 0, 0.9);
+}
+
+.career-quiz-intro-panel {
+  padding: 34px 22px 55px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 500ms ease, visibility 500ms ease;
+  width: 100%;
+}
+.career-quiz-intro-panel__heading {
+  color: #2f76c8;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-intro-panel__heading {
+    margin-bottom: 20px;
+  }
+}
+.career-quiz-intro-panel p {
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-intro-panel p {
+    font-size: 20px;
+  }
+}
+.career-quiz-intro-panel .quiz-button {
+  position: relative;
+  z-index: 1;
+  background-color: #0076ce;
+  color: #fff;
+  border: 2px solid #cccccc;
+}
+.career-quiz-intro-panel .quiz-button:hover, .career-quiz-intro-panel .quiz-button:focus {
+  background-color: #003c68;
+}
+
+.career-quiz-quiz-panel {
+  overflow: hidden;
+  padding: 30px 0;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 500ms ease, visibility 500ms ease;
+  width: 100%;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel {
+    padding: 70px 0;
+  }
+}
+.career-quiz-quiz-panel .nav-button {
+  border: none;
+  background-color: #959595;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 250ms ease-in-out;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel .nav-button {
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+}
+.career-quiz-quiz-panel .nav-button span:not(.wai) {
+  position: relative;
+  z-index: 10;
+  display: block;
+  transition: color 250ms ease-in-out;
+}
+.career-quiz-quiz-panel .nav-button:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  display: block;
+  transition: background-color 250ms ease-in-out;
+  background-color: #444444;
+  width: 75%;
+  padding-bottom: 75%;
+  height: 0;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.career-quiz-quiz-panel .nav-button:before {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 0%;
+  background-color: #2f76c8;
+  position: absolute;
+  left: -13vw;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: width 600ms ease;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel .nav-button:before {
+    left: -110%;
+  }
+}
+.career-quiz-quiz-panel .nav-button.activated {
+  background-color: #959595;
+}
+.career-quiz-quiz-panel .nav-button.activated:after {
+  background-color: #2f76c8;
+  transition-delay: 400ms;
+}
+.career-quiz-quiz-panel .nav-button.activated:focus, .career-quiz-quiz-panel .nav-button.activated:hover {
+  background-color: #7c7c7c;
+}
+.career-quiz-quiz-panel .nav-button.activated:before {
+  width: 15vw;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel .nav-button.activated:before {
+    width: 130%;
+  }
+}
+.career-quiz-quiz-panel .nav-button.current-question:after {
+  background-color: #5390d7;
+}
+.career-quiz-quiz-panel .nav-next,
+.career-quiz-quiz-panel .nav-prev {
+  display: block;
+  border: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  background: center/contain no-repeat;
+  transition: all 250ms ease-in-out;
+}
+.career-quiz-quiz-panel .nav-next:focus, .career-quiz-quiz-panel .nav-next:hover,
+.career-quiz-quiz-panel .nav-prev:focus,
+.career-quiz-quiz-panel .nav-prev:hover {
+  opacity: 0.8;
+}
+.career-quiz-quiz-panel .nav-nextbutton[disabled], .career-quiz-quiz-panel .nav-next:disabled,
+.career-quiz-quiz-panel .nav-prevbutton[disabled],
+.career-quiz-quiz-panel .nav-prev:disabled {
+  opacity: 0.3;
+}
+.career-quiz-quiz-panel .nav-next {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAnBAMAAAAIt/6NAAAAHlBMVEUAAAAvdsgvdsgvdsgvdsgvdsgvdsgvdsgvdsgvdsiogTBFAAAACXRSTlMAEM8w759Av2AgIr1WAAAAXUlEQVQoz2NgYGBOYEAAxspJAgie0MyZiggpzZkzEZKsM2ciSVoCOQjJzJnIkiIzkSWZPVEkTQaLZABUshPMK8CUQ+hDMZP+UojwxAxrRDwg4ggj/hBxiz3eUdMEAI/Cd1VWDZ1TAAAAAElFTkSuQmCC");
+}
+.career-quiz-quiz-panel .nav-prev {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAnBAMAAAAIt/6NAAAAJFBMVEUAAAAvdsgvdsgvdsgvdsgvdsgvdsgvdsgvdsgvdsgvdsgvdsghoq42AAAAC3RSTlMAEM8w72CfQL+AUP+x+TkAAABjSURBVCjPY4CDYgYkILS7EcFh1N69SQBJavduRYQUkLcNIQUCBnApEChAltoigCzljCJlQHcphmxkKYZuMG8CA7LcVhSf7Q6AeW3AJHcxYIYnIqwx4wERR5jxh4hbzHhHpAkASa+S88H+2o0AAAAASUVORK5CYII=");
+}
+.career-quiz-quiz-panel__nav {
+  max-width: 710px;
+  margin: 0 auto;
+}
+.career-quiz-quiz-panel__nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 10%;
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .career-quiz-quiz-panel__nav-list {
+    padding: 0;
+  }
+}
+.career-quiz-quiz-panel__nav-list:before {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #959595;
+}
+.career-quiz-quiz-panel__nav-item {
+  position: relative;
+}
+.career-quiz-quiz-panel__nav-item:first-child, .career-quiz-quiz-panel__nav-item:last-child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 55%;
+}
+.career-quiz-quiz-panel__nav-item:first-child {
+  left: 5px;
+}
+.career-quiz-quiz-panel__nav-item:last-child {
+  right: 5px;
+}
+.career-quiz-quiz-panel__nav-item:nth-child(2) .nav-button:before {
+  display: none;
+}
+.career-quiz-quiz-panel__nav-item button[disabled],
+.career-quiz-quiz-panel__nav-item button:disabled {
+  pointer-events: none;
+}
+.career-quiz-quiz-panel__text {
+  font-size: 18px;
+  display: block;
+  line-height: 1.2;
+  width: 100%;
+  text-align: center;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel__text {
+    font-size: 30px;
+  }
+}
+.career-quiz-quiz-panel__text strong {
+  display: block;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel__text strong {
+    display: inline;
+  }
+}
+.career-quiz-quiz-panel__icon-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0 auto 50px;
+  max-width: 440px;
+}
+.career-quiz-quiz-panel__icon-wrapper img {
+  display: block;
+  width: 40%;
+  max-width: 180px;
+  opacity: 0;
+  transition: none !important;
+}
+.career-quiz-quiz-panel__img {
+  display: block;
+  max-width: 260px;
+  margin: 0 auto;
+}
+.career-quiz-quiz-panel__form {
+  overflow: hidden;
+  position: relative;
+  padding: 34px 22px 55px;
+}
+.career-quiz-quiz-panel__form .quiz-button[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}
+.career-quiz-quiz-panel__form .quiz-button[hidden] {
+  display: none;
+}
+.career-quiz-quiz-panel__form .next-button, .career-quiz-quiz-panel__form .submit-button {
+  opacity: 1;
+  transition: opacity 500ms ease;
+}
+.career-quiz-quiz-panel__slide-wrapper {
+  width: 100%;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+.career-quiz-quiz-panel__slide-wrapper.current-question {
+  position: static !important;
+  z-index: 0 !important;
+  visibility: visible !important;
+}
+.career-quiz-quiz-panel__slide-wrapper fieldset {
+  padding: 0;
+  border: 0;
+  max-width: 990px;
+  margin: 0 auto;
+  text-align: center;
+}
+.career-quiz-quiz-panel__slide-wrapper legend {
+  margin-bottom: 30px;
+  opacity: 0;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel__slide-wrapper legend br {
+    display: none;
+  }
+}
+.career-quiz-quiz-panel__fieldset-inner-wrapper {
+  max-width: 540px;
+  margin: 0 auto;
+  opacity: 0;
+}
+.career-quiz-quiz-panel__fieldset-inner-wrapper .quiz-button {
+  width: 48%;
+  line-height: 32px;
+}
+@media screen and (min-width: 400px) {
+  .career-quiz-quiz-panel__fieldset-inner-wrapper .quiz-button {
+    line-height: normal !important;
+  }
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-quiz-panel__fieldset-inner-wrapper .quiz-button {
+    padding: 23px 0;
+  }
+}
+.career-quiz-quiz-panel__fieldset-inner-wrapper .quiz-button[for=check5] {
+  line-height: 16px;
+}
+.career-quiz-quiz-panel__fieldset-inner-wrapper .quiz-button:first-of-type {
+  float: left;
+}
+.career-quiz-quiz-panel__fieldset-inner-wrapper .quiz-button:last-of-type {
+  float: right;
+}
+.career-quiz-quiz-panel__fieldset-inner-wrapper:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.career-quiz-quiz-panel [type=radio] {
+  position: absolute;
+  left: -999999em;
+}
+.career-quiz-quiz-panel [type=radio]:focus {
+  outline: 0;
+}
+.career-quiz-quiz-panel [type=radio]:focus + .quiz-button {
+  background-color: #bababa;
+}
+.career-quiz-quiz-panel [type=radio]:checked + .quiz-button {
+  background-color: #0076ce;
+  color: #fff;
+  border: 2px solid #cccccc;
+}
+
+.career-quiz-result-panel {
+  padding: 70px 22px;
+  opacity: 1;
+  visibility: hidden;
+  transition: opacity 500ms ease, visible 500ms ease;
+}
+.career-quiz-result-panel__heading, .career-quiz-result-panel p {
+  font-size: 18px;
+  display: block;
+  line-height: 1.2;
+  width: 100%;
+  text-align: center;
+  font-weight: normal;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-result-panel__heading, .career-quiz-result-panel p {
+    font-size: 30px;
+  }
+}
+.career-quiz-result-panel p {
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+.career-quiz-result-panel p strong {
+  display: block;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-result-panel p strong {
+    display: inline;
+  }
+}
+.career-quiz-result-panel .quiz-button {
+  margin-bottom: 15px;
+}
+@media screen and (min-width: 500px) {
+  .career-quiz-result-panel #quiz-result-link {
+    margin-right: 1%;
+  }
+}
